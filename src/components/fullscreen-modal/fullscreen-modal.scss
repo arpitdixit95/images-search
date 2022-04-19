@@ -1,0 +1,83 @@
+.fullscreen-modal{
+  &__overlay{
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: 5;
+    background-color: #0009;
+    cursor: zoom-out;
+    backface-visibility: hidden;
+    overflow: auto;
+  }
+  &__content{
+    cursor: auto;
+    display: flex;
+    outline: none;
+    pointer-events: none;
+    max-height: calc(100vh - 16px);
+    padding: 16px;
+  }
+  &__close{
+    fill: #fff;
+    left: 0;
+    margin-left: 8px;
+    margin-top: 8px;
+    top: 0;
+    @media screen and (min-device-width: 48em){
+      position: fixed;
+    }
+  }
+  &__body{
+    background-color: #fff;
+    border-radius: 4px;
+    box-shadow: 0 8px 16px #00000026;
+    margin: auto;
+    min-width: 0;
+    pointer-events: auto;
+    width: 100%;
+    padding: 24px;
+    position: relative;
+  }
+  &__close-wrapper{
+    right: 16px;
+    position: absolute;
+    top: 16px;
+  }
+  &__image-item{
+    margin-top: 16px;
+  }
+}
+
+@media screen and (min-device-width: 48em){
+  .fullscreen-modal{
+    margin: 24px 0;
+    padding: 24px;
+    &__content{
+      padding: 24px 80px;
+    }
+    &__body{
+      padding: 24px;
+    }
+  }
+}
+
+@media screen and (min-device-width: 64em){
+  .fullscreen-modal{
+    margin: 32px 0;
+    padding: 32px;
+    &__content{
+      padding: 32px 120px;
+    }
+    &__body{
+      padding: 32px;
+
+    }
+    &__close-wrapper{
+      right: 32px;
+      position: absolute;
+      top: 16px;
+    }
+  }
+}

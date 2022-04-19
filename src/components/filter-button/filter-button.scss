@@ -1,0 +1,33 @@
+@import '~/styles/_variables';
+
+.filter-button{
+  &__btn{
+    border: 1px solid $base02;
+    background-color: $base01;
+    color: $primary01;
+    font-size: 16px;
+    border-radius: 8px;
+    padding: 4px 16px;
+    height: 100%;
+  }
+  &__icon{
+    display: block;
+  }
+  &__text{
+    display: none;
+  }
+}
+
+@media screen and (min-device-width: 48em){
+  .filter-button{
+    &__btn{
+      padding: 16px 32px;
+    }
+    &__icon{
+      display: none;
+    }
+    &__text{
+      display: block;
+    }
+  }
+}

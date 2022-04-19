@@ -1,0 +1,22 @@
+.home{
+  &__page{
+    display: grid;
+    width: 100%;
+    grid-template-areas: 'topbar'
+    'filter-panel'
+    'image-items';
+  }
+  &__top-wrapper{
+    grid-area: topbar;
+    display: grid;
+    grid-template-columns: 4fr 1fr;
+    grid-template-rows: 48px;
+    grid-column-gap: 24px;
+  }
+  &__filter-panel{
+    grid-area: filter-panel;
+  }
+  &__items{
+    grid-area: image-items;
+  }
+}
