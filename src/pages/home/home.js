@@ -39,6 +39,7 @@ const HomePage = ({ Home, HomeActions }) => {
   };
   const onClearFilters = () => {
     applyFilters({});
+    areFiltersVisible(false);
     if(isSearchMode){
       HomeActions.getPaginatedSearchResults(searchTerm, {}, 1);
     } else {
