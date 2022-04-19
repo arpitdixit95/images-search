@@ -7,6 +7,7 @@ const FilterButton = ({ handleFilterClick=()=>{} }) => {
     <button
       className='filter-button__btn'
       onClick={handleFilterClick}
+      aria-label={"Show Filters"}
     >
       <span className='filter-button__text'>Filters</span>
       <span className='filter-button__icon'><FilterAlt/></span>

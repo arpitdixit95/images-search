@@ -1,15 +1,15 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState, lazy } from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
-import SearchBar from '~/components/search-bar';
-import FilterButton from '~/components/filter-button';
-import Filters from '~/components/filters';
+import { defaultFilters, searchModeFilters } from '~/helpers/constants';
 import * as HomeActions from '~/actions/home';
 import './home.scss';
-import InfiniteScroll from '~/components/inifinite-scroll';
-import FullscreenModal from '~/components/fullscreen-modal';
-import { defaultFilters, searchModeFilters } from '~/helpers/constants';
-import { useDebounce } from '~/helpers/custom-hooks';
+
+const SearchBar = lazy(() => import('~/components/search-bar'));
+const FilterButton = lazy(() => import('~/components/filter-button'));
+const Filters = lazy(() => import('~/components/filters'));
+const InfiniteScroll = lazy(() => import('~/components/inifinite-scroll'));
+const FullscreenModal = lazy(() => import('~/components/fullscreen-modal'));
 
 const HomePage = ({ Home, HomeActions }) => {
   const [areFiltersVisible, setFiltersVisibility] = useState(false);

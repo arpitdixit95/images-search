@@ -1,8 +1,8 @@
-import { useEffect, useRef, useState } from "react";
-import { useIntersectionObserver } from "~/helpers/custom-hooks";
-import ImageItem from "~/components/image-item";
+import { lazy, useEffect, useRef, useState } from 'react';
+import { useIntersectionObserver } from '~/helpers/custom-hooks';
 import './infinite-scroll.scss';
 
+const ImageItem = lazy(() => import('~/components/image-item'));
 
 const InfiniteScroll = ({ items=[], isLoading=false, loadMoreItems=()=>{}, onItemClick=()=>{} }) => {
   const loadingRef = useRef();

@@ -1,7 +1,9 @@
+import {lazy} from 'react';
 import { Close } from '@mui/icons-material';
 import Modal from 'react-modal';
-import ImageItem from '~/components/image-item';
 import './fullscreen-modal.scss';
+
+const ImageItem = lazy(() => import('~/components/image-item'));
 
 const FullscreenModal = ({ showModal, closeModal=()=>{}, modalData={} }) => {
   const {data} = modalData;
