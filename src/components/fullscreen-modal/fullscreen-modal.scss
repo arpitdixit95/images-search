@@ -7,7 +7,7 @@
     top: 0;
     z-index: 5;
     background-color: #0009;
-    cursor: zoom-out;
+    cursor: auto;
     backface-visibility: hidden;
     overflow: auto;
   }
@@ -31,13 +31,13 @@
   }
   &__body{
     background-color: #fff;
-    border-radius: 4px;
+    border-radius: 8px;
     box-shadow: 0 8px 16px #00000026;
     margin: auto;
     min-width: 0;
     pointer-events: auto;
     width: 100%;
-    padding: 24px;
+    padding: 24px 16px 16px;
     position: relative;
   }
   &__close-wrapper{
@@ -45,8 +45,11 @@
     position: absolute;
     top: 16px;
   }
-  &__image-item{
+  &__image{
+    width: 100%;
+    height: 100%;
     margin-top: 16px;
+    border-radius: 8px;
   }
 }
 
@@ -58,7 +61,7 @@
       padding: 24px 80px;
     }
     &__body{
-      padding: 24px;
+      padding: 32px 24px 24px;
     }
   }
 }
@@ -71,8 +74,7 @@
       padding: 32px 120px;
     }
     &__body{
-      padding: 32px;
-
+      padding: 40px 32px 32px;
     }
     &__close-wrapper{
       right: 32px;

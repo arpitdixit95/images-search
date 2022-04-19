@@ -11,7 +11,7 @@ import { clientsClaim } from 'workbox-core';
 import { ExpirationPlugin } from 'workbox-expiration';
 import { precacheAndRoute, createHandlerBoundToURL } from 'workbox-precaching';
 import { registerRoute } from 'workbox-routing';
-import { StaleWhileRevalidate } from 'workbox-strategies';
+import { NetworkFirst, StaleWhileRevalidate } from 'workbox-strategies';
 
 clientsClaim();
 
@@ -51,7 +51,7 @@ registerRoute(
 registerRoute(
   // Add in any other file extensions or routing criteria as needed.
   ({ url }) => url.origin === self.location.origin && url.pathname.endsWith('.png'), // Customize this strategy as needed, e.g., by changing to CacheFirst.
-  new StaleWhileRevalidate({
+  new NetworkFirst({
     cacheName: 'images',
     plugins: [
       // Ensure that once this runtime cache reaches a maximum size the
@@ -70,3 +70,66 @@ self.addEventListener('message', (event) => {
 });
 
 // Any other custom service worker logic can go here.
+
+registerRoute(
+  // Add in any other file extensions or routing criteria as needed.
+  ({ url }) => url.origin === 'https://images.unsplash.com', // Customize this strategy as needed, e.g., by changing to CacheFirst.
+  new NetworkFirst({
+    cacheName: 'images',
+    plugins: [
+      // Ensure that once this runtime cache reaches a maximum size the
+      // least-recently used images are removed.
+      new ExpirationPlugin({ maxEntries: 50 }),
+    ],
+  })
+);
+self.addEventListener('fetch', event => {
+  let request = event.request;
+
+  if (request.method !== 'GET') {
+      
+      if (!navigator.onLine && isHtmlRequest(request)) {
+          return event.respondWith(caches.match(offlinePage));
+      }
+      return;
+  }
+
+  if (isHtmlRequest(request)) {
+      
+      event.respondWith(
+          fetch(request)
+              .then(response => {
+                  if (isCachableResponse(response) && !isBlacklisted(response.url)) {
+                      let copy = response.clone();
+                      caches.open(version).then(cache => cache.put(request, copy));
+                  }
+                  return response;
+              })
+              .catch(() => {
+                  return caches.match(request)
+                      .then(response => {
+                          if (!response && request.mode == 'navigate') {
+                              return caches.match(offlinePage);
+                          }
+                          return response;
+                      });
+              })
+      );
+  } else {
+if (event.request.cache === 'only-if-cached' && event.request.mode !== 'same-origin')
+    return
+      event.respondWith(
+          caches.match(request)
+              .then(response => {
+                  return response || fetch(request)
+                          .then(response => {
+                              if (isCachableResponse(response)) {
+                                  let copy = response.clone();
+                                  caches.open(version).then(cache => cache.put(request, copy));
+                              }
+                              return response;
+                          })
+              })
+      );
+  }
+});

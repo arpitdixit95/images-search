@@ -6,7 +6,7 @@ import { useDebounce } from '~/helpers/custom-hooks';
 const SearchBar = ({fetchSearchResults}) => {
   const [searchText, setSearchText] = useState('');
   const handleInputChange = () => {
-    if(searchText && searchText.length > 3){
+    if(searchText.trim()){
       fetchSearchResults(searchText);
     }
   }

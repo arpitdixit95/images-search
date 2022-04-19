@@ -27,8 +27,8 @@
     "workbox-webpack-plugin": "^6.4.1"
   },
   "scripts": {
-    "build": "webpack --config webpack.config.js",
-    "dev": "webpack serve",
+    "build": "cp .env.prod .env && webpack --config webpack.config.js",
+    "dev": "cp .env.dev .env && webpack serve",
     "start": "npm run build && npx serve ./public"
   },
   "eslintConfig": {
